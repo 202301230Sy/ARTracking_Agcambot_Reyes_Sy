@@ -14,19 +14,27 @@ public class UIManager : Singleton<UIManager>
     protected override void Awake()
     {
         base.Awake();
-        // Register each screen view 
-        foreach (var screenView in _screens.Values)
+
+        foreach (var screenView in _allScreens)
         {
-            _screens.Add(screenView.ScreenType, screenView);
+            _screens.TryAdd(screenView.ScreenType, screenView);
+
+            // idk if there was a better way to go about this
+            if (screenView.ScreenType != UIScreenType.ModeSelection)
+                screenView.HideView();
         }
+
+        ShowScreen(UIScreenType.ModeSelection);
     }
 
     public void ShowScreen(UIScreenType targetScreenType)
     {
-        // Hide current screen if it is not the target screen
-        if (_currentScreen != null && _currentScreen.ScreenType != targetScreenType)
+        Debug.Log("Switching to: " + targetScreenType);
+
+        // hide all screens first
+        foreach (var screen in _screens.Values)
         {
-            _currentScreen.HideView();
+            screen.HideView();
         }
 
         if (_screens.TryGetValue(targetScreenType, out IScreenView targetScreen))
@@ -43,5 +51,31 @@ public class UIManager : Singleton<UIManager>
             _currentScreen = targetScreen;
             _currentScreen.HideView();
         }
+    }
+
+    // button functions
+    public void ShowPlaneTracking()
+    {
+        ShowScreen(UIScreenType.PlaneTracking);
+        ARTrackingManager.Instance.SetMode(ARTrackingMode.PlaneTracking);
+    }
+
+    public void ShowImageTracking()
+    {
+        ShowScreen(UIScreenType.ImageTracking);
+        ARTrackingManager.Instance.SetMode(ARTrackingMode.ImageTracking);
+    }
+
+    public void ShowModeSelection()
+    {
+        ShowScreen(UIScreenType.ModeSelection);
+
+        // idk if its better to create a new enum or just leave it as none
+        ARTrackingManager.Instance.SetMode(ARTrackingMode.None);
+    }
+
+    public void ShowObjectModification()
+    {
+        ShowScreen(UIScreenType.ObjectModification);
     }
 }
