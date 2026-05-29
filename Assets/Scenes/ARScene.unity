@@ -164,6 +164,7 @@ GameObject:
   - component: {fileID: 154888904}
   - component: {fileID: 154888903}
   - component: {fileID: 154888905}
+  - component: {fileID: 154888906}
   m_Layer: 5
   m_Name: ObjectModifyView
   m_TagString: Untagged
@@ -248,6 +249,19 @@ MonoBehaviour:
   _screenType: 3
   _colorButtons: {fileID: 1446887333}
   _instructionText: {fileID: 331226911}
+--- !u!114 &154888906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 154888900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6539e01b237f13a4298bfdce72cece31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScreenView
+  _screenType: 3
 --- !u!1 &164014803
 GameObject:
   m_ObjectHideFlags: 0
@@ -2002,7 +2016,8 @@ GameObject:
   - component: {fileID: 592858964}
   - component: {fileID: 592858967}
   - component: {fileID: 592858966}
-  - component: {fileID: 592858965}
+  - component: {fileID: 592858969}
+  - component: {fileID: 592858968}
   m_Layer: 5
   m_Name: ImageTrackingView
   m_TagString: Untagged
@@ -2032,22 +2047,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &592858965
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 592858963}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f58a4dbd009c6164cabc462e0b716e2f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlaneTrackingView
-  _screenType: 2
-  _moveAroundInstructions: {fileID: 1049614449}
-  _tapToSpawnInstructions: {fileID: 1806541032}
-  _planeManager: {fileID: 591953222}
 --- !u!114 &592858966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2086,6 +2085,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 592858963}
   m_CullTransparentMesh: 1
+--- !u!114 &592858968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 592858963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6539e01b237f13a4298bfdce72cece31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScreenView
+  _screenType: 2
+--- !u!114 &592858969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 592858963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 470aaa180de673b4ab8eb73f83a792ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ImageTrackingView
+  _screenType: 2
+  _scanInstruction: {fileID: 1049614449}
+  _imageDetectedInstruction: {fileID: 1806541032}
+  _imageManager: {fileID: 591953220}
 --- !u!1 &631040436
 GameObject:
   m_ObjectHideFlags: 0
@@ -3478,6 +3506,7 @@ GameObject:
   - component: {fileID: 1489727974}
   - component: {fileID: 1489727973}
   - component: {fileID: 1489727972}
+  - component: {fileID: 1489727975}
   m_Layer: 5
   m_Name: PlaneTrackingView
   m_TagString: Untagged
@@ -3561,6 +3590,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1489727970}
   m_CullTransparentMesh: 1
+--- !u!114 &1489727975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489727970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6539e01b237f13a4298bfdce72cece31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScreenView
+  _screenType: 1
 --- !u!1 &1562314632
 GameObject:
   m_ObjectHideFlags: 0
@@ -3594,8 +3636,8 @@ MonoBehaviour:
   _allScreens:
   - {fileID: 817973918}
   - {fileID: 1489727972}
-  - {fileID: 592858965}
-  - {fileID: 0}
+  - {fileID: 592858969}
+  - {fileID: 154888905}
 --- !u!4 &1562314634
 Transform:
   m_ObjectHideFlags: 0
