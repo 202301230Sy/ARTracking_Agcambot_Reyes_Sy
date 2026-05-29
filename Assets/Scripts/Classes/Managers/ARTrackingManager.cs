@@ -30,7 +30,7 @@ public class ARTrackingManager : Singleton<ARTrackingManager>
 
         // This code will only be reached if target mode is a different mode
         // Disable the current mode
-        _currentTrackingMode.DisableMode();
+        _currentTrackingMode?.DisableMode();
 
         // Enable the target mode
         if (_trackingModes.TryGetValue(mode, out var newMode))
