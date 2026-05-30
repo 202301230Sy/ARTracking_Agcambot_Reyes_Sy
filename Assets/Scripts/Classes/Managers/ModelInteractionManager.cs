@@ -14,6 +14,8 @@ public class ModelInteractionManager : Singleton<ModelInteractionManager>
 
     public IModelInteractable CurrentSelected => _currentSelected;
 
+    public bool IsObjectSelected { get; private set; } = false;
+
     private void Start()
     {
         if (_colorButtonsParent != null)
@@ -66,6 +68,8 @@ public class ModelInteractionManager : Singleton<ModelInteractionManager>
         _currentSelected = model;
         _currentSelected.Select();
 
+        IsObjectSelected = true;
+
         if (_colorButtonsParent != null)
             _colorButtonsParent.SetActive(true);
 
@@ -76,6 +80,8 @@ public class ModelInteractionManager : Singleton<ModelInteractionManager>
     {
         _currentSelected?.Deselect();
         _currentSelected = null;
+
+        IsObjectSelected = false;
 
         if (_colorButtonsParent != null)
             _colorButtonsParent.SetActive(false);

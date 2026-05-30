@@ -3223,7 +3223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8af3d0d2b6f67634fa86261439ebbc5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ModelInteractionManager
-  _colorButtonsParent: {fileID: 0}
+  _colorButtonsParent: {fileID: 610611127}
   _arCamera: {fileID: 1121298074}
 --- !u!1 &1201095275
 GameObject:

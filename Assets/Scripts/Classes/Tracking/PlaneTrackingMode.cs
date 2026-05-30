@@ -46,6 +46,10 @@ public class PlaneTrackingMode : MonoBehaviour, IARTrackingMode
 
     public void UpdateMode()
     {
+        // prevent running this entire method if object has been selected
+        if (ModelInteractionManager.Instance.IsObjectSelected == true)
+            return;
+
         // Check for any active touches in the screen
         if (Touch.activeTouches.Count == 0)
         {
