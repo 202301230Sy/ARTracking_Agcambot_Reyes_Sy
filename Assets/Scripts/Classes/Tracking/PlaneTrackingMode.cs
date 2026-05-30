@@ -25,17 +25,23 @@ public class PlaneTrackingMode : MonoBehaviour, IARTrackingMode
 
     public void Initialize()
     {
-        throw new System.NotImplementedException();
+        Debug.Log("[PlaneTracking] Initialized");
     }
 
     public void EnableMode()
     {
-        EnhancedTouchSupport.Enable();
+        Debug.Log("[PlaneTracking] Enabled");
+
+        _planeManager.enabled = true;
+        _raycastManager.enabled = true;
     }
 
     public void DisableMode()
     {
-        EnhancedTouchSupport.Disable();
+        Debug.Log("[PlaneTracking] Disabled");
+
+        _planeManager.enabled = false;
+        _raycastManager.enabled = false;
     }
 
     public void UpdateMode()

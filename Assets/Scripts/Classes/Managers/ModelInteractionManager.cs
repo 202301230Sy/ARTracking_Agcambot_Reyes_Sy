@@ -1,5 +1,9 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem.EnhancedTouch;
+using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
+using TouchPhase = UnityEngine.InputSystem.TouchPhase;
+
 
 public class ModelInteractionManager : Singleton<ModelInteractionManager>
 {
@@ -23,25 +27,31 @@ public class ModelInteractionManager : Singleton<ModelInteractionManager>
 
     private void HandleTouch()
     {
-        if (Input.touchCount == 0) return;
-
-        var touch = Input.GetTouch(0);
-
-        if (touch.phase != TouchPhase.Began) return;
-
-        if (EventSystem.current != null &&
-            EventSystem.current.IsPointerOverGameObject(touch.fingerId))
+        if (Touch.activeTouches.Count == 0)
             return;
 
-        Ray ray = _arCamera.ScreenPointToRay(touch.position);
+        var touch = Touch.activeTouches[0];
+
+        Debug.Log("[Input] Touch detected");
+
+        if (touch.phase != TouchPhase.Began)
+            return;
+
+        Ray ray = _arCamera.ScreenPointToRay(touch.screenPosition);
 
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
+            Debug.Log($"HIT: {hit.collider.name}");
+
             if (hit.collider.TryGetComponent(out IModelInteractable interactable))
             {
+                Debug.Log("INTERACTABLE FOUND");
+
                 SelectModel(interactable);
                 return;
             }
+
+            Debug.Log("NO INTERACTABLE FOUND");
         }
 
         DeselectCurrent();
@@ -49,6 +59,8 @@ public class ModelInteractionManager : Singleton<ModelInteractionManager>
 
     public void SelectModel(IModelInteractable model)
     {
+        Debug.Log("Model Selected");
+
         _currentSelected?.Deselect();
 
         _currentSelected = model;
@@ -76,7 +88,7 @@ public class ModelInteractionManager : Singleton<ModelInteractionManager>
     public void ResetInteraction()
     {
         DeselectCurrent();
-    }
+    }   
 
     public bool HasSelection() => _currentSelected != null;
 }

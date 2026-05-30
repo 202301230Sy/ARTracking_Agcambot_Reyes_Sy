@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.EnhancedTouch;
 
 public class ARTrackingManager : Singleton<ARTrackingManager>
 {
@@ -17,7 +18,13 @@ public class ARTrackingManager : Singleton<ARTrackingManager>
     protected override void Awake()
     {
         base.Awake();
+        EnhancedTouchSupport.Enable();
         RegisterModes();
+    }
+
+    private void Update()
+    {
+        _currentTrackingMode?.UpdateMode();
     }
 
     public void SetMode(ARTrackingMode mode)
